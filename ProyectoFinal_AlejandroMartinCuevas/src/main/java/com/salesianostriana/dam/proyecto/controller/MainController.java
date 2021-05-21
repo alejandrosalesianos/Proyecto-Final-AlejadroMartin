@@ -43,31 +43,11 @@ public class MainController {
 	}
 	@PostMapping("/formularioSk/submit")
 	public String submit(@ModelAttribute("skinForm")Skin skin,Personaje personaje, Model model) {
+		Skin sk = new Skin();
 		model.addAttribute("skin", personaje);
 		personaje.addSkin(skin);
 		personajeServicio.save(personaje);
 		return "redirect:/";
-	}
-	@GetMapping("/editar/{idPersonaje}")
-	public String editar(@PathVariable("idPersonaje") Long idPer, Model model) {
-		Personaje personaje = personajeServicio.findById(idPer).orElse(null);
-		List<String> tiers = List.of(
-				"Tier 1",
-				"Tier 2",
-				"Tier 3",
-				"Tier 4",
-				"Tier 5"
-				);
-		model.addAttribute("personaje", personaje);
-		model.addAttribute("tier", tiers);
-		model.addAttribute("skinForm", personaje.getSkins().get(0));
-		if(personaje != null) {
-			model.addAttribute("personaje", personaje);
-			model.addAttribute("skin", personaje.getSkins().get(0));
-			return "FormularioSkin";
-		}else {
-			return "redirect:/";
-		}
 	}
 	@PostMapping("editar/submit")
 	public String submitEditar(@ModelAttribute("skinForm") Skin skin,Personaje personaje, Model model) {

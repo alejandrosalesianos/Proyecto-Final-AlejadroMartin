@@ -70,8 +70,8 @@ private final PersonajeServicio personajeServicio;
 			return "redirect:/personaje/";
 	}
 	@GetMapping("/detalles/{id}/editar/{idSkin}")
-	public String editarSkin(@PathVariable("id")Long idPer , @PathVariable("idSkin")Long idSkin,Model model) {
-		Personaje personaje = personajeServicio.findById(idPer).orElse(null);
+	public String editarSkin(@PathVariable("id")Long id , @PathVariable("idSkin")Long idSkin,Model model) {
+		Personaje personaje = personajeServicio.findById(id).orElse(null);
 		Skin skins = new Skin();
 				List<String> tiers = List.of(
 				"Tier 1",
@@ -81,9 +81,9 @@ private final PersonajeServicio personajeServicio;
 				"Tier 5"
 				);
 				model.addAttribute("tier", tiers);
-				model.addAttribute("personaje", personajeServicio.findAll());
+				model.addAttribute("personaje", personaje);
 		for (Skin skin : personaje.getSkins()) {
-			if(skin.getId() == idSkin) {
+			if(skin.getIdSkin() == idSkin) {
 				skins = skin;
 			}
 		}
@@ -95,17 +95,18 @@ private final PersonajeServicio personajeServicio;
 	}
 	@PostMapping("/detalles/editar/submit")
 	public String editarSkinSubmit(@ModelAttribute("skinForm")Skin skin,Model model,Personaje personaje) {
-		model.addAttribute("skin", skin);
+		model.addAttribute("skin", personaje);
+		personaje.removeSkin(personaje.getSkins().get(personajeServicio.posicionSkinById(personaje, skin)));
 		personaje.addSkin(skin);
 		personajeServicio.save(personaje);
 		return "redirect:/";
 	}
-	@GetMapping("/detalles/{idPer}/Borrar/{idSkin}")
-	public String borrarSkin(@PathVariable("idPer")Long idPer , @PathVariable("idSkin")Long idSkin,Model model) {
+	@GetMapping("/detalles/{id}/Borrar/{idSkin}")
+	public String borrarSkin(@PathVariable("id")Long idPer , @PathVariable("idSkin")Long idSkin,Model model) {
 		Personaje personaje = personajeServicio.findById(idPer).orElse(null);
 		Skin skins = new Skin();
 		for (Skin skin : personaje.getSkins()) {
-			if(skin.getId() == idSkin) {
+			if(skin.getIdSkin() == idSkin) {
 				skins = skin;
 				personaje.removeSkin(skins);
 				personajeServicio.save(personaje);

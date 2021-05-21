@@ -14,25 +14,25 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 public class Skin {
-	
-	@Id @GeneratedValue
-	private long id;
-	
+
+	@Id
+	@GeneratedValue
+	private long idSkin;
+
 	private String nombreSkin;
-	private String categoria; //hay categorias desde 1 a 5 siendo 5 la mejor
+	private String categoria; // hay categorias desde 1 a 5 siendo 5 la mejor
 	private double precio;
 	private String descripcion;
 	private String img;
-	
+
 	@ManyToOne
 	private Personaje personaje;
 
-	public Skin( String nombreSkin, String categoria, double precio, String descripcion) {
+	public Skin(String nombreSkin, String categoria, double precio, String descripcion) {
 		this.nombreSkin = nombreSkin;
 		this.categoria = categoria;
 		this.precio = precio;
 		this.descripcion = descripcion;
 	}
-	
-	
+
 }
