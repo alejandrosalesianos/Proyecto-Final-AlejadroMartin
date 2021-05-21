@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  	<title>Detalles de personajes</title>
+  	</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="#" th:href="@{/}">SkinManiacos</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#" th:href="@{/personaje/}">Lista de Personajes</a>
+      </li>
+    </ul>
+    
+    <form class="form-inline my-2 my-lg-0 float-right" action="/action_page.php">
+			<input class="form-control mr-sm-2" type="text" placeholder="Buscar Skins">
+			<button class="btn btn-success" type="submit">Buscar</button>
+		 </form> 
+  </div>  
+</nav>
+<br>
+
+	<div class="container">
+			<div class="col-md-8">
+				<h1 class="product-name" th:text=${personaje.nombre}>Nombre del
+					personaje</h1>
+				<div class="product-price">
+					<div class="row">
+						<div class=col-md-4>					
+							<span class="pvp"
+								th:text="${personaje.clasePersonaje}">Clase Del Personaje</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<table>
+		<tr th:each="personaje : ${personajes}">
+	        <td th:text="${personaje.id}">ID</td>
+	        <td th:text="${personaje.nombre}">Nombre Personaje</td>
+	        <td th:text="${personaje.clasePersonaje}">Clase Personaje</td>
+      </tr>
+      
+      <tr th:each="skin: ${personaje.skins}">
+        <td><img th:src="${skin.img}" alt="Imagen Skin"></img></td>
+      	<td th:text="${skin.nombreSkin}">nombreSkin</td>
+      	<td th:text="${skin.categoria}">Categoria</td>
+      	<td th:text="${skin.descripcion}">Descripcion</td>
+      	<td th:text="${skin.precio}">Precio</td>
+      	<td th:text="${skin.id}">id</td>
+      	
+      	<td class="operaciones"><a href="#"
+								th:href="@{/personaje/detalles/{id}(id=${personaje.id})/editar/{idSkin}(idSkin=${skin.id})}">
+								<button class="bg-dark text-success">Editar</button></a>
+								<a th:href="@{/personaje/detalles/{idPer}(idPer=${personaje.id})/Borrar/{idSkin}(idSkin=${skin.id})}"><button type="button" class="bg-dark text-danger">Borrar</button></a>
+		</td>
+      </tr>
+    </table>
+    
+    </div>
+	
+	<!-- Footer -->
+	<footer class="text-center text-lg-start bg-light text-muted">
+	  <!-- Section: Social media -->
+	  <section
+	    class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
+	  >
+	    <!-- Left -->
+	    <div class="me-5 d-none d-lg-block">
+	      <span>Conocenos a traves de nuestras redes sociales</span>
+	    </div>
+	    <!-- Left -->
+	
+	    <!-- Right -->
+	    <div>
+	      <a href="" class="me-4 text-reset">
+	        <i class="bi bi-facebook-f"></i>
+	      </a>
+	      <a href="" class="me-4 text-reset">
+	        <i class="bi bi-twitter"></i>
+	      </a>
+	      <a href="" class="me-4 text-reset">
+	        <i class="bi bi-google"></i>
+	      </a>
+	      <a href="" class="me-4 text-reset">
+	        <i class="bi bi-instagram"></i>
+	      </a>
+	      <a href="" class="me-4 text-reset">
+	        <i class="bi bi-linkedin"></i>
+	      </a>
+	      <a href="" class="me-4 text-reset">
+	        <i class="bi bi-github"></i>
+	      </a>
+	    </div>
+	    <!-- Right -->
+	  </section>
+	  <!-- Section: Social media -->
+	
+	  <!-- Section: Links  -->
+	  <section class="">
+	    <div class="container text-center text-md-start mt-5">
+	      <!-- Grid row -->
+	      <div class="row mt-3">
+	        <!-- Grid column -->
+	        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+	          <!-- Content -->
+	          <h6 class="text-uppercase fw-bold mb-4">
+	            <i class="fas fa-gem me-3"></i>SkinManiacos
+	          </h6>
+	          <p>
+	            Una compañia dedicada a la venta de skins en tus juegos de confianza
+	          </p>
+	        </div>
+	        <!-- Grid column -->
+	
+	        <!-- Grid column -->
+	        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+	          <!-- Links -->
+	          <h6 class="text-uppercase fw-bold mb-4">
+	            Productos
+	          </h6>
+	          <p>
+	            <a href="#!" class="text-reset">Skins</a>
+	          </p>
+	          <p>
+	            <a href="#!" class="text-reset">Diseños</a>
+	          </p>
+	        </div>
+	        <!-- Grid column -->
+	
+	        <!-- Grid column -->
+	        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+	          <!-- Links -->
+	          <h6 class="text-uppercase fw-bold mb-4">
+	            Links Utiles
+	          </h6>
+	          <p>
+	            <a href="#!" class="text-reset">Precio Mercado</a>
+	          </p>
+	          <p>
+	            <a href="#!" class="text-reset">Configuración</a>
+	          </p>
+	          <p>
+	            <a href="#!" class="text-reset">Pedidos</a>
+	          </p>
+	          <p>
+	            <a href="#!" class="text-reset">Ayuda</a>
+	          </p>
+	        </div>
+	        <!-- Grid column -->
+	
+	        <!-- Grid column -->
+	        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+	          <!-- Links -->
+	          <h6 class="text-uppercase fw-bold mb-4">
+	            Contáctanos
+	          </h6>
+	          <p><i class="fas fa-home me-3"></i> Sevilla 41010</p>
+	          <p>
+	            <i class="fas fa-envelope me-3"></i>
+	            SkinManiacos@Gmail.com
+	          </p>
+	          <p><i class="fas fa-phone me-3"></i> + 34 234 567 88</p>
+	          <p><i class="fas fa-print me-3"></i> + 34 234 567 89</p>
+	        </div>
+	        <!-- Grid column -->
+	      </div>
+	      <!-- Grid row -->
+	    </div>
+	  </section>
+	  <!-- Section: Links  -->
+	
+	  <!-- Copyright -->
+	  <div class="text-center p-4">
+	    © 2021 Copyright:
+	    <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+	  </div>
+	  <!-- Copyright -->
+	</footer>
+	<!-- Footer -->
+</body>
+</html>

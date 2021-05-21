@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<style>
+	form{
+	text-align: center;
+	}
+	div{
+	text-align:center;
+	}
+	input{
+	margin-left: 48%;
+	}
+	textarea{
+	margin-left: 48%;
+	}
+	select{
+	margin-left: 48%;
+	}
+	</style>
+    <title>Formulario de Skins</title>
+  </head>
+  <body class="bg-secondary text-light">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="#" th:href="@{/}">SkinManiacos</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#" th:href="@{/personaje/}">Lista de Personajes</a>
+      </li>
+    </ul>
+    
+    <form class="form-inline my-2 my-lg-0 float-right" action="/action_page.php">
+			<input class="form-control mr-sm-2" type="text" placeholder="Buscar Skins">
+			<button class="btn btn-success" type="submit">Buscar</button>
+		 </form> 
+  </div>  
+</nav>
+<br>
+    
+    <div class="container">
+  <div class="jumbotron text-dark">
+    <h1>Registro de skins</h1>      
+  </div>  
+</div>
+    <form method="POST" th:action="*{id != 0} ? @{/personaje/detalles/editar/submit} : @{/formularioSk/submit}" th:object="${skinForm}" class="w-100 needs-validation">
+  <div class="form-group justify-content-center">
+    <label class="control-label col-sm-2" for="nombreSkin">Nombre de la Skin</label>
+    <div class="col-sm-10">
+      <input class="form-control w-25" type="text" id="nombreSkin" th:field="*{nombreSkin}" placeholder="Nombre de la Skin" required>
+      <div class="valid-feedback">Valido.</div>
+      <div class="invalid-feedback">Rellene el campo porfavor.</div>
+    </div>
+  </div>
+  <div class="form-group w-100">
+    <label class="control-label col-sm-2" for="categoria">Categoria:</label>
+    <div class="col-sm-10">
+      <select th:field="*{categoria}" class="form-control w-25" id="categoria" required>
+              <option th:each="tiers : ${tier}"
+                      th:value="${tiers}" th:text="${tiers}">
+                      Categorias
+              </option>
+            </select>
+            <div class="valid-feedback">Valido.</div>
+      		<div class="invalid-feedback">Rellene el campo porfavor.</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="precio">Precio de la Skin</label>
+    <div class="col-sm-10">
+      <input class="form-control w-25" id="precio" type="text" th:field="*{precio}" required>
+    	<div class="valid-feedback">Valido.</div>
+      	<div class="invalid-feedback">Rellene el campo porfavor.</div>
+    </div>
+  </div>
+   <div class="form-group">
+    <label class="control-label col-sm-2" for="descripcion">Descripción de la Skin</label>
+    <div class="col-sm-10">
+      <textarea class="form-control w-25" id="descripcion" cols="25" rows="5" th:field="*{descripcion}" placeholder="Descipcion detallada de la Skin" required></textarea>
+    	<div class="valid-feedback">Valido.</div>
+     	<div class="invalid-feedback">Rellene el campo porfavor.</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="personajeSkin">Personaje de la skin</label>
+    <div class="col-sm-10">
+      <select th:field="*{personaje}" class="form-control w-25" id="personajeSkin" required>
+              <option th:each="nombrePer : ${personaje}"
+                      th:value="${nombrePer.id}" th:text="${nombrePer.nombre}">
+                      Personajes
+              </option>
+            </select>
+            <div class="valid-feedback">Valido.</div>
+     		<div class="invalid-feedback">Rellene el campo porfavor.</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="precio">Imagen de la Skin</label>
+    <div class="col-sm-10">
+      <input class="form-control w-25" id="imagen" type="text" th:field="*{img}" required>
+    	<div class="valid-feedback">Valido.</div>
+        <div class="invalid-feedback">Rellene el campo porfavor.</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default bg-dark text-light">Enviar</button>
+    </div>
+  </div>
+</form>
+<!-- Footer -->
+<footer class="text-center text-lg-start bg-light text-muted">
+  <!-- Section: Social media -->
+  <section
+    class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
+  >
+    <!-- Left -->
+    <div class="me-5 d-none d-lg-block">
+      <span>Conocenos a traves de nuestras redes sociales</span>
+    </div>
+    <!-- Left -->
+
+    <!-- Right -->
+    <div>
+      <a href="" class="me-4 text-reset">
+        <i class="bi bi-facebook-f"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="bi bi-twitter"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="bi bi-google"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="bi bi-instagram"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="bi bi-linkedin"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="bi bi-github"></i>
+      </a>
+    </div>
+    <!-- Right -->
+  </section>
+  <!-- Section: Social media -->
+
+  <!-- Section: Links  -->
+  <section class="">
+    <div class="container text-center text-md-start mt-5">
+      <!-- Grid row -->
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <!-- Content -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            <i class="fas fa-gem me-3"></i>SkinManiacos
+          </h6>
+          <p>
+            Una compañia dedicada a la venta de skins en tus juegos de confianza
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Productos
+          </h6>
+          <p>
+            <a href="#!" class="text-reset">Skins</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Diseños</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Links Utiles
+          </h6>
+          <p>
+            <a href="#!" class="text-reset">Precio Mercado</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Configuración</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Pedidos</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Ayuda</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Contáctanos
+          </h6>
+          <p><i class="fas fa-home me-3"></i> Sevilla 41010</p>
+          <p>
+            <i class="fas fa-envelope me-3"></i>
+            SkinManiacos@Gmail.com
+          </p>
+          <p><i class="fas fa-phone me-3"></i> + 34 234 567 88</p>
+          <p><i class="fas fa-print me-3"></i> + 34 234 567 89</p>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+  </section>
+  <!-- Section: Links  -->
+
+  <!-- Copyright -->
+  <div class="text-center p-4">
+    © 2021 Copyright:
+    <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->
+
+    <!-- Optional JavaScript -->
+   <script>
+// Disable form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Get the forms we want to add validation styles to
+    let forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    let validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
