@@ -9,17 +9,11 @@
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-	
-	<style>
-	
-	</style>
-	
-    <title>SkinManiacos</title>
-  </head>
-  
+  	<title>Lista de Personajes</title>
+</head>
+<body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <a class="navbar-brand" href="#">SkinManiacos</a>
+  <a class="navbar-brand" href="#" th:href="@{/}">SkinManiacos</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -37,24 +31,29 @@
   </div>  
 </nav>
 <br>
-<body>
-	<a href=# th:href="@{/formularioSk}"><button type="button" class="btn btn-success">Añadir skins</button></a>
-	<h1>Bienvenido a SkinManiacos su página de compra de Skins de confianza</h1>
-	<h3>Aqui estan las skins a la venta:</h3>
-    
-    <div class="d-flex flex-wrap flex-row">
-	    <div th:each="personaje : ${personajes}">
-		    <div th:each="skin : ${personaje.skins}">
-		    	<div class="card m-3" style="width:400px">
-		  		<div class="card-body">
-		  			<img class="card-img-top" th:src="${skin.img}" alt="Imagen Skin">
-				    <h4 class="card-title" th:text="${skin.nombreSkin}">John Doe</h4><h4 class="card-title" th:text="${skin.precio}"></h4>
-				    <p class="card-text" th:text="${skin.Personaje.nombre}">Some example text.</p>
-				    </div>    
-		  		</div>
-				</div>
-	    	</div>
-	    </div>
+
+	<a href=# th:href="@{/personaje/nuevo}"><button type="button" class="btn btn-success">Añadir personaje</button></a>
+
+	<table class="w-100 table-striped">
+    <caption>Lista de personajes</caption>
+      <tr>
+        <th>id</th>
+        <th>nombre</th>
+        <th>Clase</th>
+        <th>Operaciones</th>
+        <th>Detalles</th>
+      </tr>
+      <tr th:each="personaje : ${personajes}">
+        <td th:text="${personaje.id}">ID</td>
+        <td th:text="${personaje.nombre}">Nombre Personaje</td>
+        <td th:text="${personaje.clasePersonaje}">Clase Personaje</td>
+        <td class="operaciones"><a href="#"
+								th:href="@{/personaje/editar/{id}(id=${personaje.id})}">
+								<button class="bg-dark text-success">Editar</button></a>
+								<a th:href="@{/personaje/borrar/{id}(id=${personaje.id})}"><button type="button" class="bg-dark text-danger" >Borrar</button></a></td>
+		<td><a href="#" th:href="@{/personaje/detalles/{idPer}(idPer=${personaje.id})}">Ver detalles</a></td>
+      </tr>
+    </table>
     <!-- Footer -->
 <footer class="text-center text-lg-start bg-light text-muted">
   <!-- Section: Social media -->
@@ -174,11 +173,5 @@
   <!-- Copyright -->
 </footer>
 <!-- Footer -->
-      
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+</body>
 </html>

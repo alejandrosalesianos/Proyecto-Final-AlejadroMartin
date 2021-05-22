@@ -35,4 +35,15 @@ public class Skin {
 		this.descripcion = descripcion;
 	}
 
+	public Skin(String nombreSkin, String categoria, double precio, String descripcion, String img,
+			Personaje personaje) {
+		this.nombreSkin = nombreSkin;
+		this.categoria = categoria;
+		this.precio = precio;
+		this.descripcion = descripcion;
+		this.img = img;
+		this.personaje = personaje;
+	}
+	
+
 }

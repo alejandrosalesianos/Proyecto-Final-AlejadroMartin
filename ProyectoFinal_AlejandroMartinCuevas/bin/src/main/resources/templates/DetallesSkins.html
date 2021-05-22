@@ -14,12 +14,6 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	  	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-<style>
-img{
-	width: 200px;
-}
-</style>
 <title>Detalles de personajes</title>
 </head>
 <body>
@@ -59,22 +53,21 @@ img{
 				</div>
 			</div>
 		</div>
-		<h3>Lista de Skins</h3>
 		<table>
 			<tr>
-			<td>Imagen</td>
-			<td>nombre Skin</td>
-			<td>Categoria</td>
-			<td>Descripción</td>
-			<td>Precio</td>
-			
+				<td th:text="${personaje.id}">ID</td>
+				<td th:text="${personaje.nombre}">Nombre Personaje</td>
+				<td th:text="${personaje.clasePersonaje}">Clase Personaje</td>
 			</tr>
+
 			<tr th:each="skin: ${personaje.skins}">
 				<td><img th:src="${skin.img}" alt="Imagen Skin"></img></td>
 				<td th:text="${skin.nombreSkin}">nombreSkin</td>
 				<td th:text="${skin.categoria}">Categoria</td>
 				<td th:text="${skin.descripcion}">Descripcion</td>
 				<td th:text="${skin.precio}">Precio</td>
+				<td th:text="${skin.idSkin}">id</td>
+				<td th:text="${personaje.id}">id</td>
 				
 
 				<td class="operaciones"><a href="#"

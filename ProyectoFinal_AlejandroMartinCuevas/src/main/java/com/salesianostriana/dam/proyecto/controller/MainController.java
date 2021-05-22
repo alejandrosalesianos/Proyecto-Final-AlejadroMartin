@@ -43,7 +43,6 @@ public class MainController {
 	}
 	@PostMapping("/formularioSk/submit")
 	public String submit(@ModelAttribute("skinForm")Skin skin,Personaje personaje, Model model) {
-		Skin sk = new Skin();
 		model.addAttribute("skin", personaje);
 		personaje.addSkin(skin);
 		personajeServicio.save(personaje);
@@ -62,19 +61,4 @@ public class MainController {
 		personaje.removeSkin(personaje.getSkins().get(0));
 		return "redirect:/";
 	}
-	@GetMapping("/agregarPersonajes")
-	public String formularioPersonajes() {
-		List<Personaje> listaPersonajes = List.of(
-				new Personaje("Merlin", "Mago"),
-				new Personaje("Artemis", "Arquera"),
-				new Personaje("Merli", "Mago"),
-				new Personaje("Artemi", "Arquera"),
-				new Personaje("Neith", "Arquera")
-				);
-		for (Personaje personaje : listaPersonajes) {
-			personajeServicio.save(personaje);
-		}
-		return "redirect:/";
-	}
-	
 }
