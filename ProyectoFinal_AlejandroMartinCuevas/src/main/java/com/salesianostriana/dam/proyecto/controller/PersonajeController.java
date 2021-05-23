@@ -15,30 +15,55 @@ import com.salesianostriana.dam.proyecto.modelo.Skin;
 import com.salesianostriana.dam.proyecto.servicio.PersonajeServicio;
 
 import lombok.RequiredArgsConstructor;
-
+/**
+ * Esta clase controla todos los editar de borrar y editar tanto de personajes como de skins
+ * @author aleja
+ *
+ */
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/personaje")
 public class PersonajeController {
 	
 private final PersonajeServicio personajeServicio;
-	
+	/**
+	 * Pasamos todos los personajes para poder imprimirlos
+	 * @param model
+	 * @return la pagina con todos los personajes
+	 */
 		@GetMapping("/")
-		public String todosLosPersonajesYSkins(Model model) {
+		public String todosLosPersonajes(Model model) {
 		model.addAttribute("personajes", personajeServicio.findAll());		
 		return "ListaPersonajes";
 	
 	}
+		/**
+		 * pasamos un nuevo personaje para registrar en el formulario
+		 * @param model
+		 * @return 
+		 */
 	@GetMapping("/nuevo")
 	public String agregarPersonaje(Model model) {
 		model.addAttribute("personaje", new Personaje());
 		return "FormularioPersonaje";
 	}
+	/**
+	 * registramos los datos del formulario
+	 * @param personaje
+	 * @param model
+	 * @return El nuevo personaje guardado en la base de datos
+	 */
 	@PostMapping("/nuevo/submit")
 	public String submit(@ModelAttribute("persForm") Personaje personaje, Model model) {
 		personajeServicio.save(personaje);
 		return "redirect:/personaje/";
 	}
+	/**
+	 * Pasamos por la url la id del personaje a modificar
+	 * @param id
+	 * @param model
+	 * @return Devuelve la pagina para editar personajes
+	 */
 	@GetMapping("/editar/{id}")
 	public String editar(@PathVariable("id") Long id, Model model) {
 		Personaje personaje = personajeServicio.findById(id).orElse(null);
@@ -49,17 +74,35 @@ private final PersonajeServicio personajeServicio;
 			return "redirect:/personaje/";
 		}
 	}
+	/**
+	 * Registramos los datos del formulario
+	 * @param personaje
+	 * @param model
+	 * @return Guardamos los datos modificados
+	 */
 	@PostMapping("/editar/submit")
 	public String submitEditar(@ModelAttribute("persForm") Personaje personaje, Model model) {
 		personajeServicio.edit(personaje);
 		return "redirect:/personaje/";
 	}
+	/**
+	 * Borramos el personaje del que pasemos la Id
+	 * @param id
+	 * @param model
+	 * @return Borra al personaje de la base de datos
+	 */
 	@GetMapping("/borrar/{id}")
 	public String borrar(@PathVariable("id") Long id, Model model) {
 		Personaje personaje = personajeServicio.findById(id).orElse(null);	
 		personajeServicio.delete(personaje);
 		return "redirect:/personaje/";
 	}
+	/**
+	 * Nos redirige a la pagina de detalles de cada personaje segun la Id
+	 * @param id
+	 * @param model
+	 * @return La página del personaje seleccionado
+	 */
 	@GetMapping("/detalles/{id}")
 	public String detalles(@PathVariable("id")Long id, Model model) {
 		Personaje pers = personajeServicio.findById(id).orElse(null);
@@ -69,6 +112,13 @@ private final PersonajeServicio personajeServicio;
 		}
 			return "redirect:/personaje/";
 	}
+	/**
+	 * Editamos la skin del personaje seleccionado en los detalles
+	 * @param id
+	 * @param idSkin
+	 * @param model
+	 * @return Editar la skin del personaje seleccionada
+	 */
 	@GetMapping("/detalles/{id}/editar/{idSkin}")
 	public String editarSkin(@PathVariable("id")Long id , @PathVariable("idSkin")Long idSkin,Model model) {
 		Personaje personaje = personajeServicio.findById(id).orElse(null);
@@ -93,6 +143,13 @@ private final PersonajeServicio personajeServicio;
 		}
 			return "redirect:/personaje/";
 	}
+	/**
+	 * registramos los datos de la edición de skin
+	 * @param skin
+	 * @param model
+	 * @param personaje
+	 * @return La skin editada del personaje
+	 */
 	@PostMapping("/detalles/editar/submit")
 	public String editarSkinSubmit(@ModelAttribute("skinForm")Skin skin,Model model,Personaje personaje) {
 		model.addAttribute("skin", personaje);
@@ -101,6 +158,13 @@ private final PersonajeServicio personajeServicio;
 		personajeServicio.save(personaje);
 		return "redirect:/";
 	}
+	/**
+	 * Borramos la skin del personaje seleccionado en los detalles
+	 * @param id
+	 * @param idSkin
+	 * @param model
+	 * @return Borrar la skin del personaje seleccionada
+	 */
 	@GetMapping("/detalles/{id}/Borrar/{idSkin}")
 	public String borrarSkin(@PathVariable("id")Long idPer , @PathVariable("idSkin")Long idSkin,Model model) {
 		Personaje personaje = personajeServicio.findById(idPer).orElse(null);

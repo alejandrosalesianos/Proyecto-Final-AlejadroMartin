@@ -11,12 +11,19 @@ import com.salesianostriana.dam.proyecto.modelo.Skin;
 import com.salesianostriana.dam.proyecto.servicio.PersonajeServicio;
 
 import lombok.RequiredArgsConstructor;
+/**
+ * Clase para iniciar datos en la aplicación web
+ * @author aleja
+ *
+ */
 @Component
 @RequiredArgsConstructor
 public class InitData {
-
-	private final PersonajeServicio personajeSer;
 	
+	private final PersonajeServicio personajeSer;
+	/**
+	 * Inicia los datos y los guarda en la base de datos
+	 */
 	@PostConstruct
 	public void init() {
 		List<Personaje> listaPersonajes = List.of(

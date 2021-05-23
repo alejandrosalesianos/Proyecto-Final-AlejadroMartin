@@ -8,7 +8,11 @@ import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+/**
+ * La clase que da forma a las skins
+ * @author aleja
+ *
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,13 +32,28 @@ public class Skin {
 	@ManyToOne
 	private Personaje personaje;
 
+	/**
+	 * 
+	 * @param nombreSkin
+	 * @param categoria
+	 * @param precio
+	 * @param descripcion
+	 */
 	public Skin(String nombreSkin, String categoria, double precio, String descripcion) {
 		this.nombreSkin = nombreSkin;
 		this.categoria = categoria;
 		this.precio = precio;
 		this.descripcion = descripcion;
 	}
-
+	/**
+	 * 
+	 * @param nombreSkin
+	 * @param categoria
+	 * @param precio
+	 * @param descripcion
+	 * @param img
+	 * @param personaje
+	 */
 	public Skin(String nombreSkin, String categoria, double precio, String descripcion, String img,
 			Personaje personaje) {
 		this.nombreSkin = nombreSkin;

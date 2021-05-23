@@ -18,6 +18,12 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+/**
+ * Esta es la clase que va a gestionar todo el tema del control de personajes y donde se encuentra la lista de skins
+ * que puede tener un personaje
+ * @author aleja
+ *
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,7 +40,12 @@ public class Personaje {
 	@EqualsAndHashCode.Exclude
 	@OneToMany(mappedBy = "personaje", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Skin> skins = new ArrayList<>();
-
+	
+	/**
+	 * 
+	 * @param nombre
+	 * @param clasePersonaje
+	 */
 	public Personaje(String nombre, String clasePersonaje) {
 		this.nombre = nombre;
 		this.clasePersonaje = clasePersonaje;

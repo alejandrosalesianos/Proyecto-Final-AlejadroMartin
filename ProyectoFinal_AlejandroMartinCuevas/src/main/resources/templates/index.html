@@ -48,7 +48,8 @@
 		    	<div class="card m-3" style="width:400px">
 		  		<div class="card-body">
 		  			<img class="card-img-top" th:src="${skin.img}" alt="Imagen Skin">
-				    <h4 class="card-title" th:text="${skin.nombreSkin}">John Doe</h4><h4 class="card-title" th:text="${skin.precio}"></h4>
+				    <h4 class="card-title" th:text="${skin.nombreSkin}">John Doe</h4>
+				    <h4 class="card-title" th:text="${'Precio: ' + skin.precio}"></h4>
 				    <p class="card-text" th:text="${skin.Personaje.nombre}">Some example text.</p>
 				    </div>    
 		  		</div>

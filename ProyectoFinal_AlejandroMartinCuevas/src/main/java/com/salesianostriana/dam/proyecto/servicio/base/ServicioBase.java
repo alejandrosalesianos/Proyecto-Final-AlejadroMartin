@@ -5,7 +5,14 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
-
+/**
+ * Clase que añade las funcionalidades básicas a los servicios
+ * @author aleja
+ *
+ * @param <T>
+ * @param <ID>
+ * @param <R>
+ */
 public abstract class ServicioBase <T, ID, R extends JpaRepository<T, ID>> {
 
 	@Autowired
