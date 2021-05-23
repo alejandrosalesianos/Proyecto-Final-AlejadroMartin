@@ -17,7 +17,6 @@
 	
     <title>SkinManiacos</title>
   </head>
-  <body>
   
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <a class="navbar-brand" href="#">SkinManiacos</a>
@@ -38,22 +37,10 @@
   </div>  
 </nav>
 <br>
-	
+<body>
 	<a href=# th:href="@{/formularioSk}"><button type="button" class="btn btn-success">Añadir skins</button></a>
-	
-    <table class="w-100">
-    <caption>Lista de personajes</caption>
-      <tr>
-        <th>id</th>
-        <th>nombre</th>
-        <th>Clase</th>
-      </tr>
-      <tr th:each="personaje : ${personajes}">
-        <td th:text="${personaje.id}">ID</td>
-        <td th:text="${personaje.nombre}">Nombre Personaje</td>
-        <td th:text="${personaje.clasePersonaje}">Clase Personaje</td>
-      </tr>
-    </table>
+	<h1>Bienvenido a SkinManiacos su página de compra de Skins de confianza</h1>
+	<h3>Aqui estan las skins a la venta:</h3>
     
     <div class="d-flex flex-wrap flex-row">
 	    <div th:each="personaje : ${personajes}">
@@ -62,6 +49,7 @@
 		  		<div class="card-body">
 		  			<img class="card-img-top" th:src="${skin.img}" alt="Imagen Skin">
 				    <h4 class="card-title" th:text="${skin.nombreSkin}">John Doe</h4>
+				    <h4 class="card-title" th:text="${'Precio: ' + skin.precio}"></h4>
 				    <p class="card-text" th:text="${skin.Personaje.nombre}">Some example text.</p>
 				    </div>    
 		  		</div>

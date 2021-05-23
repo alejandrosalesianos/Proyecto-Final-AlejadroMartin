@@ -40,7 +40,7 @@
 <body>
 	<a href=# th:href="@{/formularioSk}"><button type="button" class="btn btn-success">Añadir skins</button></a>
 	<h1>Bienvenido a SkinManiacos su página de compra de Skins de confianza</h1>
-	<h3>Aqui estan las skins a la venta:</h3>
+	<h3>Aquí estan las skins a la venta:</h3>
     
     <div class="d-flex flex-wrap flex-row">
 	    <div th:each="personaje : ${personajes}">
@@ -49,7 +49,7 @@
 		  		<div class="card-body">
 		  			<img class="card-img-top" th:src="${skin.img}" alt="Imagen Skin">
 				    <h4 class="card-title" th:text="${skin.nombreSkin}">John Doe</h4>
-				    <h4 class="card-title" th:text="${'Precio: ' + skin.precio}"></h4>
+				    <h4 class="card-title" th:text="${'Precio: ' + skin.precio + ' Gemas'}"></h4>
 				    <p class="card-text" th:text="${skin.Personaje.nombre}">Some example text.</p>
 				    </div>    
 		  		</div>
